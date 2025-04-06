@@ -1,7 +1,7 @@
 import * as THREE from 'three';
-import { Screen } from 'three';
-import { lights } from 'three/examples/jsm/nodes/Nodes.js';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import { Screen, Light } from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
 
 //import css file
 import './style.css';
@@ -61,8 +61,8 @@ window.addEventListener('resize', () => {
 const loop = () => {
     controls.update();
     lights.rotation.x += 0.1;
-    //lights.rotation.y += 0.1;
-    Renderer.render(screen, Camera);
+    Mesh.rotation.x += 0.1;
+    //Mesh.rotation.y += 0.1;
     window.requestAnimationFrame(loop);
 }
 
