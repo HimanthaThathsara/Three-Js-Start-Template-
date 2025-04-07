@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+
+		<style>
+			body { margin: 0; }
+		</style>
+
+        <!-- Import from a CDN -->
+        <!-- In index.html we'll need to add an import map defining where to get the package -->
+        <!-- Always this code should be in side of the  "<head></head>"" tag -->
+        <script type="importmap">
+            {
+				"imports": {
+					"three": "https://cdn.jsdelivr.net/npm/three@0.161/build/three.module.js",
+                    "jsm/": "https://cdn.jsdelivr.net/npm/three@0.161/examples/jsm/" }
+			}
+        </script>
+        <!-- Don't forget to replace "three@0.161" with an actual version of three.js, like "v0.149.0". The most recent version can be found on the npm version list. -->
+
+	</head>
+
+	<body>
+		<script type="module" src="/main.js"></script>
+        <!-- one HTML file to define the webpage, and a JavaScript file to run your three.js code.  -->
+	</body>
+
+</html>
