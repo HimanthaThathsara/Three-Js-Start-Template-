@@ -1,0 +1,21 @@
+{
+  "name": "grid-helper",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx vite",
+    "dev": "npx vite",
+    "build": "npx vite build",
+    "preview": "npx vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.166.0"
+  },
+  "devDependencies": {
+    "vite": "^5.3.2"
+  }
+}
