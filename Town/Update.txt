@@ -1,0 +1,8 @@
+I want to add every car in the map move in the road.
+This can achive by the using yuka-js libary 
+
+==================================================
+
+https://mugen87.github.io/yuka/
+https://github.com/ankitjha2603/3d-city-tour/tree/main
+https://youtube.com/playlist?list=PLjcjAqAnHd1ENaMQ_xee0PQ2vVbUfnz2N&si=TWYGB5dtXdVmh_C-
