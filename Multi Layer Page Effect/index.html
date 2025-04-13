@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi Layer Page Effects</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/100/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/2.1.3/TweenMax.min.js"></script>
+</head>
+<body class="text-center">
+    <div id="page">
+        <div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+            <header class="masthead mb-auto">
+                <div class="inner">
+                   
+                </div>
+            </header>
+
+            <main role="main" class="inner cover">
+                <p class="lead">
+                    <a href="#" id="trigger" class="btn btn-lg btn-secondary">Trigger</a>
+                </p>
+            </main>
+
+            <footer class="mastfoot mt-auto">
+                <div class="inner">
+                    <p></p>
+                </div>
+            </footer>
+        </div>
+    </div>
+
+    <canvas id="reveal-effect"></canvas>
+    
+    <!-- Link to your main.js file -->
+    <script type="module" src="main.js"></script>
+</body>
+</html>
