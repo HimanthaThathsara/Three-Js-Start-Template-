@@ -1,0 +1,112 @@
+    <!--Add this script tag in the page head-->
+    <!-- <script src="https://dist.pixotronics.com/webgi/runtime/viewer-0.9.20.js"> </script> -->
+    
+   
+   <!-- <webgi-viewer id="viewer-3d" src="https://dist.pixotronics.com/webgi/assets/gltf/cube_diamond_sample.gltf" environment="https://dist.pixotronics.com/webgi/assets/hdr/gem_2.hdr" style="width: 100%; height: 100%; z-index: 1; display: block;"/> -->   <!-- WEBGI Modeler Tag-->
+    
+// The SDK can be added to package.json with module bundle and type declarations like this:
+"devDependecies": {
+ 	"webgi": "https://dist.pixotronics.com/webgi/runtime/bundle-0.9.20.tgz",
+ 	"@types/webgi": "https://dist.pixotronics.com/webgi/runtime/bundle-types-0.9.20.tgz"
+}
+
+// The SDK can be imported in the main.js file like this:
+import {ViewerApp} from "https://dist.pixotronics.com/webgi/runtime/bundle-0.9.20.mjs";  // Import the ViewerApp from link
+import {ViewerApp} from "webgi"; // Import the ViewerApp from npm package
+
+
+// https://codepen.io/repalash/pen/mdpyrNa
+//You can see the imported JS files in CodePen by going into pen settings -> JS tab -> external files.
+
+
+Create a canvas
+First add a HTML Canvas element on the page.
+
+<canvas id="my-canvas"></canvas>
+
+The canvas can be styled independently with css or js to set the width and the height.
+
+Import the Library
+In a typescript or javascript file, the viewer can be imported directly.
+
+import {ViewerApp} from "webgi";
+
+
+Create the viewer.
+ViewerApp can be initialised with just the canvas.
+
+async function intialize3D(){
+    const viewer = new ViewerApp({
+      canvas: document.getElementById('main-canvas') as HTMLCanvasElement,
+    })
+    // add plugins and load a model. More below.
+}
+
+Some optional options are available that control the base rendering pipeline.
+
+const viewer = new ViewerApp({
+    canvas,
+    useRgbm: true, // Use HDR RGBM Pipeline. false will use HDR Half float pipeline
+    useGBufferDepth: true, // Uses depth prepass for faster rendering, has z-fighting in some cases.
+    isAntialiased: false, // Uses multi-sample render target. (only for extreme cases)
+})
+
+
+
+
+Add plugins
+ViewerApp comes with a library of plugins to interact with the 3D scene, add new features and functionality. Check the Plugins page for more.
+
+We can start by adding the AssetManagerPlugin to load our 3d model.
+
+The AssetManagerPlugin manages download, management, caching, parsing, loading and adding of assets to the scene. Extensions can be added for loading different file types and also to export textures, materials and GLTF models. Check the Asset Management page for more
+
+First import the plugin.
+
+// All plugins can be imported from `webgi`
+import {
+    ViewerApp,
+    AssetManagerPlugin, TonemapPlugin, // ...others
+} from "webgi";
+
+Then add to the viewer.
+
+const manager = new AssetManagerPlugin();
+await viewer.addPlugin(manager);
+
+or simply
+
+const  manager = await viewer.addPlugin(AssetManagerPlugin);
+
+More plugins can be added to enhance the quality and add features.
+
+await viewer.addPlugin(TonemapPlugin);
+await viewer.addPlugin(PickingPlugin);
+await viewer.addPlugin(GroundPlugin);
+await viewer.addPlugin(DiamondPlugin);
+
+After adding all the plugins call:
+
+viewer.renderer.refreshPipeline()
+
+
+
+Load 3D Assets
+We can use the manager to load 3d models, environment maps, materials and images. To load a hosted glb file from a URL
+
+const options = {autoScale: false}
+const assets = await manager.addFromPath("https://demo-assets.pixotronics.com/pixo/gltf/cube.glb", options)
+
+it's possible to load an HDR environment map with the manager and setting it to the current scene.
+
+const envMap = await manager.importer!.importSinglePath<ITexture&Texture>("https://demo-assets.pixotronics.com/pixo/hdr/p360-01.hdr")
+viewer.scene.environment = envMap || null;
+
+
+
+
+
+
+
+
+
