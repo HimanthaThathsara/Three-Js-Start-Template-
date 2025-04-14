@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!--Add this script tag in the page head-->
+    <script src="https://dist.pixotronics.com/webgi/runtime/viewer-0.9.20.js"> </script>   <!--WEBGI WEB Script-->
+
+</head>
+
+<body>
+
+
+<!--Add the viewer element somewhere inside the body of the page.-->
+<!--WEBGI MODEL TAG-->
+<webgi-viewer id="viewer-3d" src="bmw_m3_need_for_speed_most_wanted.glb" environment="https://dist.pixotronics.com/webgi/assets/hdr/gem_2.hdr" style="width: 100%; height: 100%; z-index: 1; display: block;"/> 
+
+<script>
+    const element = document.getElementById('viewer-3d');
+    
+    element.addEventListener('initialized', ()=>{
+        const viewer = element.viewer; // `ViewerApp`
+        console.log(viewer);
+        // Use the viewer
+        viewer.load("some_other_model");
+        viewer.getPlugin(DepthOfFieldPlugin).enabled = true;
+    
+    })
+</script>
+
+</body>
+</html>
