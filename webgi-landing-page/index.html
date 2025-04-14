@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>WEBGi Landing Page Demo</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" type="image/png" sizes="32x32" href="assets/images/icons8-bmw-32.png">
+
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@200;400;700&family=Playfair+Display+SC:wght@400;700&display=swap" rel="stylesheet">
+
+
+	<script src="https://dist.pixotronics.com/webgi/runtime/viewer-0.9.20.js"> </script> <!-- WEBGI Modeler Script-->
+
+</head>
+
+
+<style>
+	body {
+	margin: 0;
+	padding: 0;
+	line-height: 1;
+	overflow: hidden;
+	overflow-y: scroll;
+	font-family: "Archivo", sans-serif;
+	scroll-behavior: initial;
+	color: #000000;
+	width: 100vw;
+	}
+
+	body::-webkit-scrollbar {
+	display: none;
+	}
+
+	ol,
+	ul {
+	list-style: none;
+	}
+	
+
+
+	#webgi-canvas {
+	width: 100vw;
+	height: 100dvh;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	left: 0;
+	/* touch-action: none;
+	pointer-events: none; */
+	z-index: 1;
+	}
+
+	#webgi-canvas-container {
+	z-index: 1;
+	width: 100vw;
+	height: 100dvh;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	border: #52322B 1px solid;
+	}
+
+	
+
+	.loader {
+	  display: flex;
+	  position: fixed;
+	  width: 100%;
+	  height: 100%;
+	  z-index: 20;
+	  /* font-size: 20px;
+	  background-image: url(assets/images/275721881_681399976639732_4304269458937507013_n.jpeg);
+	  background-repeat: no-repeat;
+	  background-size: cover; */
+	  background-color: #b6b6b6;
+	  align-items: center;
+	  justify-content: center;
+	  flex-direction: column;
+	  gap: 2em;
+	  font-size: 12px;
+	}
+
+	.loader .progress {
+	  position: absolute;
+	  top: 60%;
+	  width: 50%;
+	  height: 1px;
+	  background: #52322B;
+	  transform: scaleX(0);
+	  transition: transform 1s;
+	  transform-origin: left;
+	  z-index: 10;
+	  margin: 0 5%;
+	}
+
+	.loaded .loader {
+	  display: none;
+	}
+
+	.loaded .header--container {
+	  opacity: 1;
+	  transition: opacity 3s ease, visibility 3s ease;
+	}
+
+
+
+
+	.header {
+			position: absolute;
+			display: flex;
+			width: 100%;
+			justify-content: center;
+	}
+	.header--container {
+			display: flex;
+			width: 80vw;
+			justify-content: space-between;
+			align-items: center;
+			margin-top: 20px;
+			opacity: 1;
+			z-index: 10;
+	}
+	.header--brand {
+			color: #52322B;
+			font-family: 'Archivo', sans-serif;
+			font-weight: 200;
+			font-size: 1.5625rem;
+			line-height: 100%;
+			user-select: none;
+	}
+	.header--brand a {
+			font-size: 0.875rem;
+			padding-left: 10px;
+			text-decoration: none;
+			color: #52322B;
+	}
+
+	.header--menu {
+			display: inline-flex;
+			gap: 0.2em;
+			align-items: center;
+	}
+	.music--control, .night--mode {
+			padding: 10px 30px;
+			color: #52322B;
+			cursor: pointer;
+			transition: all 0.4s ease-in-out;
+			user-select: none;
+	}
+
+	.music--control--svg, .night--mode--svg {
+			width: 24px;
+			height: 24px;
+			fill: none;
+			stroke: #52322B;
+			stroke-linecap: round;
+			stroke-linejoin: round;
+	}
+	
+</style>
+
+
+<body>
+	<audio id="Audio-loder" src="assets/sounds/Logo Screen Track.mp3" autoplay loop ></audio>
+
+	<div class="loader">
+	  <!-- <img src="assets/images/340-3401976_nfs-most-wanted-logo-removebg-preview.png" alt="" style="height: 50px; width: 250px;"> -->
+	  <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="48" height="48" viewBox="0 0 50 50">
+		<path d="M 25 1 C 11.757813 1 1 11.757813 1 25 C 1 38.242188 11.757813 49 25 49 C 38.242188 49 49 38.242188 49 25 C 49 11.757813 38.242188 1 25 1 Z M 25 3 C 37.164063 3 47 12.835938 47 25 C 47 37.160156 37.164063 47 25 47 C 12.839844 47 3 37.160156 3 25 C 3 12.835938 12.839844 3 25 3 Z M 23.46875 3.71875 L 21.375 3.96875 L 21.15625 10.28125 L 22.78125 10.03125 L 22.9375 5.8125 L 24.40625 10.03125 L 25.59375 10.03125 L 27.0625 5.8125 L 27.21875 10.03125 L 28.84375 10.28125 L 28.625 3.96875 L 26.53125 3.71875 L 25 8.15625 Z M 38.78125 8.5625 L 35 13.5625 L 36.15625 14.625 L 40.34375 12.71875 L 37.5625 16.375 L 38.375 17.75 L 44.0625 15.125 L 43.25 13.75 L 39.96875 15.25 L 42.3125 12.1875 L 41.28125 10.90625 L 37.78125 12.53125 L 39.96875 9.65625 Z M 10.9375 9.3125 C 10.796875 9.324219 10.636719 9.355469 10.5 9.40625 C 10.242188 9.503906 10.015625 9.660156 9.84375 9.875 C 9.746094 9.996094 9.660156 10.128906 9.5625 10.25 C 9.054688 10.886719 8.539063 11.519531 8.03125 12.15625 C 7.59375 12.703125 7.15625 13.234375 6.71875 13.78125 C 6.691406 13.816406 6.652344 13.871094 6.625 13.90625 C 6.621094 13.910156 6.683594 13.933594 6.6875 13.9375 C 6.859375 14.074219 7.050781 14.207031 7.21875 14.34375 C 7.859375 14.855469 8.484375 15.363281 9.125 15.875 C 9.757813 16.382813 10.394531 16.898438 11.03125 17.40625 C 11.191406 17.535156 11.371094 17.683594 11.53125 17.8125 C 11.539063 17.820313 11.554688 17.851563 11.5625 17.84375 C 11.59375 17.804688 11.625 17.757813 11.65625 17.71875 C 12.089844 17.175781 12.535156 16.636719 12.96875 16.09375 C 13.492188 15.441406 14.007813 14.777344 14.53125 14.125 C 14.800781 13.789063 15.089844 13.484375 15.21875 13.0625 C 15.285156 12.84375 15.300781 12.597656 15.28125 12.375 C 15.195313 11.777344 14.835938 11.285156 14.28125 11.03125 C 13.726563 10.777344 13.082031 10.871094 12.59375 11.21875 C 12.554688 11.246094 12.507813 11.28125 12.46875 11.3125 C 12.550781 11.035156 12.601563 10.753906 12.53125 10.46875 C 12.464844 10.191406 12.296875 9.949219 12.09375 9.75 C 11.78125 9.445313 11.363281 9.28125 10.9375 9.3125 Z M 10.8125 10.90625 C 11.027344 10.890625 11.257813 10.960938 11.40625 11.125 C 11.566406 11.300781 11.613281 11.550781 11.5625 11.78125 C 11.503906 11.984375 11.347656 12.121094 11.21875 12.28125 C 10.960938 12.605469 10.695313 12.925781 10.4375 13.25 C 10.175781 13.574219 9.914063 13.894531 9.65625 14.21875 C 9.390625 14.007813 9.140625 13.804688 8.875 13.59375 C 8.773438 13.511719 8.664063 13.425781 8.5625 13.34375 C 8.558594 13.339844 8.679688 13.226563 8.6875 13.21875 C 9.179688 12.605469 9.664063 11.988281 10.15625 11.375 C 10.285156 11.214844 10.394531 11.019531 10.59375 10.9375 C 10.660156 10.910156 10.742188 10.910156 10.8125 10.90625 Z M 25 11 C 17.28125 11 11 17.28125 11 25 C 11 32.71875 17.28125 39 25 39 C 32.71875 39 39 32.71875 39 25 C 39 17.28125 32.71875 11 25 11 Z M 13 12.3125 C 13.289063 12.304688 13.535156 12.460938 13.65625 12.71875 C 13.761719 12.96875 13.730469 13.257813 13.5625 13.46875 C 13.394531 13.679688 13.226563 13.886719 13.0625 14.09375 C 12.605469 14.667969 12.144531 15.238281 11.6875 15.8125 C 11.664063 15.792969 11.617188 15.800781 11.59375 15.78125 C 11.46875 15.679688 11.34375 15.570313 11.21875 15.46875 C 11.003906 15.296875 10.808594 15.109375 10.59375 14.9375 C 11.007813 14.417969 11.398438 13.925781 11.8125 13.40625 C 12.015625 13.152344 12.234375 12.878906 12.4375 12.625 C 12.582031 12.445313 12.757813 12.320313 13 12.3125 Z M 25 13 C 31.640625 13 37 18.359375 37 25 L 25 25 L 25 37 C 18.359375 37 13 31.640625 13 25 L 25 25 Z"></path>
+		</svg>
+	  <p>Loading... Please wait</p>
+	  <div class="progress"></div>
+	</div>
+
+	<section class="header">
+		<div class="header--container">
+			<h1 class="header--brand">
+				BMW M3 GTR
+				<span>
+					<a href="#####" target="_blank">BY Himantha</a>
+				</span>
+			</h1>
+			<ul class="header--menu">
+				<li class="music--control">
+					<svg class="music--control--svg" viewBox="0 0 24 24">
+						<path d="M11 5L6 9H2V15H6L11 19V5Z" />
+						<path class="sound-wave" d="M19.07 4.92999C20.9447 6.80527 21.9979 9.34835 21.9979 12C21.9979 14.6516 20.9447 17.1947 19.07 19.07M15.54 8.45999C16.4774 9.39763 17.004 10.6692 17.004 11.995C17.004 13.3208 16.4774 14.5924 15.54 15.53" />
+					</svg>
+				</li>
+				<li class="night--mode">
+					<svg class="night--mode--svg" viewBox="0 0 24 24">
+						<path d="M20.9999 12.79C20.8426 14.4922 20.2038 16.1144 19.1581 17.4668C18.1125 18.8192 16.7034 19.8458 15.0956 20.4265C13.4878 21.0073 11.7479 21.1181 10.0794 20.7461C8.41092 20.3741 6.8829 19.5345 5.67413 18.3258C4.46536 17.117 3.62584 15.589 3.25381 13.9205C2.88178 12.252 2.99262 10.5121 3.57336 8.9043C4.15411 7.29651 5.18073 5.88737 6.53311 4.84175C7.8855 3.79614 9.5077 3.15731 11.2099 3C10.2133 4.34827 9.73375 6.00945 9.85843 7.68141C9.98312 9.35338 10.7038 10.9251 11.8893 12.1106C13.0748 13.2961 14.6465 14.0168 16.3185 14.1415C17.9905 14.2662 19.6516 13.7866 20.9999 12.79V12.79Z" />
+					</svg>
+				</li>
+			</ul>
+		</div>
+	</section>
+
+	<div id="webgi-canvas-container">
+		<canvas id="webgi-canvas"></canvas>
+	</div>
+
+	<audio id="Audio" src="assets/sounds/Shapeshifter (Game Version) (Clean).mp3" loop ></audio>
+
+	<script src="main.js" type="module"></script>
+
+	<script>
+		async function setupViewer(){
+			const viewer = new ViewerApp({canvas: document.getElementById('webgi-canvas')})
+		
+			await viewer.addPlugin(AssetManagerPlugin);
+
+			await addBasePlugins(viewer);
+
+			await viewer.load("bmw_m3_need_for_speed_most_wanted.glb");
+
+			await viewer.setEnvironmentMap("https://dist.pixotronics.com/webgi/assets/hdr/gem_2.hdr.png?v=1");
+
+			await viewer.setGround({
+				enabled: true,
+				bakedShadows: true,
+				bakedReflections: true,
+				transparentReflectionBackground: false,
+				background: {
+					type: "color",
+					color1: "#00000000",
+					color2: "#00000000"
+				}
+			});
+
+			// const cameraPlugin = await viewer.addPlugin(CameraControlsPlugin);
+			// cameraPlugin.controls.setLookAt(50, 30, 100, 20, 0, 0); 
+
+		}
+
+		setupViewer();
+	</script>
+
+	<script>
+
+		const musicControl = document.querySelector('.music--control');
+		const musicControlSvg = document.querySelector('.music--control--svg');
+		const soundWave = document.querySelector('.sound-wave');
+		
+		const nightMode = document.querySelector('.night--mode');
+		const body = document.querySelector('body');
+
+		const audio = document.getElementById('Audio');
+		
+		
+		
+		// window.addEventListener('load', () => {
+		// 	setTimeout(() => {
+		// 		const audioLoder = document.getElementById('Audio-loder');
+		// 		document.body.classList.add('loaded');
+		// 		audioLoder.pause();
+		// 		audio.currentTime = 0;
+		// 	}, 10000); 
+		// });
+		
+		document.addEventListener('DOMContentLoaded', () => {
+			const progressBar = document.querySelector('.loader .progress');
+			const audioLoder = document.getElementById('Audio-loder');
+
+			let progress = 0;
+			const interval = setInterval(() => {
+				progress += 10;
+				progressBar.style.transform = `scaleX(${progress / 100})`;
+				if (progress >= 100) {
+					clearInterval(interval);
+					document.body.classList.add('loaded');
+					audioLoder.pause();
+					audio.play();
+					audio.setAttribute('autoplay','');
+				}
+			}, 3000); 
+		});	
+		
+
+		// audio.addEventListener("ended", function(){
+		// 	audio.currentTime = 0;
+		// 	console.log("ended");
+		// 	let TakeEnd = true;
+		// 		if (TakeEnd){
+		// 			audio.setAttribute('src', 'assets/sounds/Shapeshifter (Game Version) (Clean).mp3');
+		// 			audio.setAttribute('autoplay','');
+		// 			audio.setAttribute('loop','');
+		// 		}
+		// });
+		
+
+		let musicPlaying = true;
+
+		musicControl.addEventListener('click', () => {
+			if (musicPlaying) {
+				soundWave.remove();
+				audio.pause();
+				musicPlaying = false;
+			} else {
+				musicControlSvg.appendChild(soundWave);
+				audio.play();
+				musicPlaying = true;
+			}
+		});
+		
+
+
+		let NIghtModeOff = false;
+		
+		nightMode.addEventListener('click', () => {
+			if(!NIghtModeOff) {
+				body.style.background = 'radial-gradient(circle, #464646bd 20%, #464646bd 100%)';  // change the background color if ou want
+				NIghtModeOff = true;
+			} else {
+				body.style.background = '#E6BFBE';
+				NIghtModeOff = false;
+			}
+			
+		});
+		
+	</script>
+
+
+  </body>
+  
+
+
+</html>
