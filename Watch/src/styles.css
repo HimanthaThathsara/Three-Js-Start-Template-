@@ -1,0 +1,369 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Archivo", sans-serif;
+  overflow: hidden;
+  background: 
+    linear-gradient(
+    180deg,
+    #202020 0%,
+    #343434 100%
+  );
+  color: white;
+  background-attachment: fixed;
+  overscroll-behavior: none;
+    -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+}
+
+
+.loader {
+  display: flex;
+  position: absolute;
+  font-family: "Archivo", sans-serif;
+  width: 100%;
+  height: 100%;
+  z-index: 30; /* font-size: 20px; background-image:
+	url(assets/images/275721881_681399976639732_4304269458937507013_n.jpeg);
+	background-repeat: no-repeat; background-size: cover; */
+  background: 
+    linear-gradient(
+    180deg,
+    #202020 0%,
+    #343434 100%
+  );
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2em;
+  font-size: 16px;
+}
+.loader .progress {
+  position: absolute;
+  top: 60%;
+  width: 50%;
+  height: 1px;
+  background: #ffffff;
+  font-family: "Archivo", sans-serif;
+  transform: scaleX(0);
+  transition: transform 1s;
+  transform-origin: left;
+  z-index: 30;
+  margin: 0 5%;
+}
+.loaded .loader {
+  display: none;
+}
+.loaded .header--container {
+  opacity: 1;
+  transition: opacity 3s ease, visibility 3s ease;
+}
+
+
+
+ol,
+ul {
+  list-style: none;
+}
+.header {
+  position: absolute;
+  display: flex;
+  margin-top: -160px;
+  width: 100%;
+  font-family: "Archivo", sans-serif;
+  z-index: 20;
+  justify-content: center;
+}
+.header--container {
+  display: flex;
+  font-family: "Archivo", sans-serif;
+  width: 95vw;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 1;
+}
+#logo {
+  position: absolute;
+  width: fit-content;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#logo p{
+    font-size: 1.2em;
+  text-transform: uppercase;
+  font-family: "Archivo", sans-serif;
+   font-weight: 700;
+  
+
+}
+#logo p span{
+   font-weight: 100;
+   font-family: "Archivo", sans-serif;
+}
+.header--brand {
+  color: #ffffff;;
+  font-family: "Archivo", sans-serif;
+  font-weight: 200;
+  font-size: 1.5625rem;
+  line-height: 100%;
+}
+.header--brand a {
+  font-size: 0.875rem;
+  padding-left: 10px;
+  text-decoration: none;
+  color: #ffffff;;
+}
+.header--menu {
+  display: inline-flex;
+  gap: 0.2em;
+  align-items: center;
+}
+.music--control,
+.night--mode {
+  padding: 10px 50px;
+  color: #ffffff;;
+  cursor: pointer;
+  transition: all 0.4s ease-in-out;
+}
+.music--control--svg,
+.night--mode--svg {
+  width: 24px;
+  height: 24px;
+  fill: none;
+  stroke: #ffffff;;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+
+ .button {
+  background-color: transparent;
+  width: 155px;
+  height: 60px;
+  border: 1px solid #FFFFFF;
+  border-radius: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  font-weight: 200;
+  font-size: 0.9375rem;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  float: right;
+  cursor: pointer;
+  transition: all 0.8s ease-in-out;
+  gap: 1em;
+  font-weight: 100;
+  z-index:10;
+  flex-direction: row;
+  cursor: pointer;
+  transition: all 0.8s ease-in-out;
+}
+@media (max-width: 600px) {
+   .button {
+    margin: 0 auto 100px;
+    float: none;
+  }
+}
+
+.button:hover svg {
+  transform: rotate(180deg);
+  transition: all 0.8s ease-in-out;
+}
+
+
+.btn-customize {
+  display: flex;
+  margin: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-customize:hover {
+  transform: rotate(180deg);
+  transition: all 0.8s ease-in-out;
+  /* transform: translateY(-3px); */
+  /* box-shadow: inset 0 0 60px #ffffff; */
+}
+
+.btn-customize:hover svg {
+  transition: transform 0.8s ease-in-out;
+}
+
+
+.btn-customize-1 {
+  display: flex;
+  margin: 6px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-customize-1:hover {
+  transform: translateX(10px);
+  transition: transform 0.4s ease-in-out;
+}
+
+.btn-customize-1:hover svg {
+  transform: translateX(10px);
+  transition: transform 0.8s ease-in-out;
+}
+
+model-viewer {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: fixed;
+  top: 0;
+  justify-content: center; /* align horizontal */
+  align-items: center; /* align vertical */
+  --poster-color: transparent;
+  z-index: 2;
+}
+
+model-viewer--poster {
+  position: absolute;
+}
+
+
+#instrucoes {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding-left: 40px;
+  padding-bottom: 40px;
+  font-size: 12px;
+  color: #ffffff;
+  z-index: 10;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+#instrucoes a {
+  font-size: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+#instrucoes p {
+  font-size: 12px;
+  line-height: 14px;
+  color: #ffffff;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+#footer {
+  text-align: right;
+  top: 35vh;
+  right: 60px;
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 650px;
+  position: absolute;
+  line-height: 35px;
+  color: white
+}
+
+#footer h2{
+  font-size: 1.75em;
+  font-weight: 200;
+}
+
+#footer p {
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  line-height: 15px;
+  width: 300px;
+  opacity: 0.5;
+}
+
+
+#webgi-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+}
+
+#webgi-canvas-container {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: 10;
+}
+
+
+#Button-Exit , #Button-Next{
+  z-index: 1000;
+  font-weight: 100;
+  font-weight: 200;
+  width: 155px;
+  height: 60px;
+  gap: 1em;
+  position: absolute;
+  top: 800px;
+  right: 100px;
+  border-radius: 58px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-size: 1rem;
+  letter-spacing: -0.04em;
+  color: #000000;
+  float: right;
+  border: 1px solid #000000;
+  background-color: transparent;
+}
+
+#Button-Next{
+  top: 730px !important;
+  right: 100px;
+  padding-left: 15px;
+}
+
+
+@media only screen and (max-width: 600px) {
+  h1 {
+    display: flex;
+    width: 85%;
+    height: 100vh;
+    margin-top: auto;
+    vertical-align: center;
+    align-content: center;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: row;
+  }
+
+  #footer {
+    top: 120px;
+    left: 40px;
+    font-size: 16px !important;
+    width: 85%;
+  }
+  
+  #footer p {
+    top: 80px;
+    text-align: left;
+    font-size: 14px !important;
+  }
+
+  #instrucoes p {
+    width: 100%;
+    font-size: 10px !important;
+    z-index: 2;
+  }
+
+}
