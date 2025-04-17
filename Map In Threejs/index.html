@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Map In Three js</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        line-height: 1;
+        overflow: hidden;
+        overflow-y: scroll;
+        font-family: "Archivo", sans-serif;
+        scroll-behavior: initial;
+        color: #000000;
+        width: 100vw;
+    }
+	
+	.loader {
+	  display: flex;
+	  position: fixed;
+	  width: 100%;
+	  height: 100%;
+	  z-index: 20;
+	  /* font-size: 20px;
+	  background-image: url(assets/images/275721881_681399976639732_4304269458937507013_n.jpeg);
+	  background-repeat: no-repeat;
+	  background-size: cover; */
+	  background-color: #b6b6b6;
+	  align-items: center;
+	  justify-content: center;
+	  flex-direction: column;
+	  gap: 2em;
+	  font-size: 18px;
+	}
+
+	.loader .progress {
+	  position: absolute;
+	  top: 60%;
+	  width: 50%;
+	  height: 1px;
+	  background: #52322B;
+	  transform: scaleX(0);
+	  transition: transform 1s;
+	  transform-origin: left;
+	  z-index: 10;
+	  margin: 0 5%;
+	}
+
+	.loaded .loader {
+	  display: none;
+	}
+
+	.loaded .header--container {
+	  opacity: 1;
+	  transition: opacity 3s ease, visibility 3s ease;
+	}
+
+/* .img-loader {
+    aspect-ratio: 1;
+    display: grid;
+    filter: drop-shadow(0 0 0 #fff);
+    animation: l2 0.8s infinite;
+}
+@keyframes l2 {
+    100% { filter: drop-shadow(0 0 5px #fff); }
+} */
+ol,
+ul {
+	list-style: none;
+}
+
+.header {
+        position: absolute;
+        display: flex;
+        width: 100%;
+        justify-content: center;
+}
+.header--container {
+        display: flex;
+        width: 80vw;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        opacity: 1;
+        z-index: 10;
+}
+.header--brand {
+        color: #52322B;
+        font-family: 'Archivo', sans-serif;
+        font-weight: 200;
+        font-size: 1.5625rem;
+        line-height: 100%;
+}
+.header--brand a {
+        font-size: 0.875rem;
+        padding-left: 10px;
+        text-decoration: none;
+        color: #52322B;
+}
+
+.header--menu {
+        display: inline-flex;
+        gap: 0.2em;
+        align-items: center;
+}
+.music--control, .night--mode {
+        padding: 10px 30px;
+        color: #52322B;
+        cursor: pointer;
+        transition: all 0.4s ease-in-out;
+}
+
+.music--control--svg, .night--mode--svg {
+        width: 24px;
+        height: 24px;
+        fill: none;
+        stroke: #52322B;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+}
+
+.hero-text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: #000;
+    position: absolute;
+    font-family: "Archivo", sans-serif;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* .hero-text h1 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    font-family: "Archivo", sans-serif;
+}
+
+.hero-text p {
+    font-size: 20px;
+    font-family: "Archivo", sans-serif;
+    color: #555;
+    margin-bottom: 2rem;
+} */
+
+.explore-btn {
+    padding: 0.8rem 2rem;
+    font-size: 18px;
+    font-family: "Archivo", sans-serif;
+    color: #000;
+    border: 2px solid #000;
+    border-radius: 15px;
+    background: transparent;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.explore-btn:hover {
+    background: #000;
+    color: #fff;
+}
+
+
+</style>
+
+</head>
+<body>
+
+    <div class="loader">
+        <img class="img-loder" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAACXBIWXMAAAsTAAALEwEAmpwYAAAEVUlEQVR4nO2abWhWZRjHf9M5NZpNc1uIptWY2ovWKhFt9GyGzTcCQacwDQYWZKXlSKGNjTZfmi9z+ElEhEA/hIYzP4j4QRMRPwT5LhOllxkZhVpKM2eLC/4H7k7PM8+e7dk5D+4PN7vfzrnv69zXdV//63oG/ehHWmK0StpiKLAa+AO4A2wAHiWNkAEsBH4ArgFLgbdV/15jkcdLwDHgLtAMDHPGHgHqgL+AU8BUIog8YAdwH9gHbAXmJ5j7tObc17zIoAq4CZwGSp3+Um10UpxnXgD2A/eA2UQEnVKZgXHGrO8doB4YqVKvPhvbBlwCsoiIIDFfX6ZPsOFAA7BTdQ8jgN+Aj4mgIG8CTSozfXOb45zccuCG7CxUuIJM1cY8WP0AUKj2ZGBZnNM7C2wnQoLEfKcT07hdx3PV1+BTL8MbQAfwIhEUZABQrfEW4AowBMgFauO8x26xo0RMkGLZw8vACeAwcB1Yo3nvAxOddxRLEHtXaLgNLFb9deAr0RCjKoZX5fx2i3flA4N0GTwJNALljhqGhl3AIdWzgfUJ5lzxnV65hDDqQhQEma4vPlZtI4lTVM/QaX0O7AH+CXAxhIoL8u6ekTdLpYyiTHPmLY26IKtE2z1n9wrwDTDKNy8WdUFy5SvKnD6zl0+BlcBglQYRxsgKYvgS2Mv/UQBsUnnG6XcFeQto1amGjpk6laCcKSYK0ySb6tD1HToGKJS1+CQIjHN9qMTEr8BaIoLxwBngouMME+Ep2U+GfNC3cpKhIgfYAvwtKrJKlCMRMhVQWTD1nviVPbtZ7wpFlcwv/AJcBhY4G13XxXOfABOA54APHPZ7HvgdWJEg2kwJzCi/E8+q09XqojrB1zUWUCkWvM234UES4qYcrAVoKYMZ5heiJPb3iS5s4F1fnyXnNqpeL8IYD487t9jXyrr0GpLJSVlm0UWjkg9lAZN0RWIHXo7MHGzSsFulAmgDfgQWBbiRcNitbQYRR7ODcQ+wn3jrL9LabdpL0PX/g5PK29Y5dDsozG4+czZfpVyw2UeyGnFHe+o2vDC1PMkvYSHtcbHgRDYRBBnaQ0uyfKzTF7p6qhIUFqO8Rs9QpLWLe0IsOxUQ5ctvVIpKWDvVyNdalVo7X3tJSpAS5XRvScfNGz8G1OjOT0WqM0vvrtFaWVr7lvZie+qRB7/u8+AFMmKv3Ruwm83U6NlUevwc+YZ24IgTIM2QMXvtZFAovjbHIaAHla3fLv/T6yiUx/UWyRW/8uxnZDc/juW6PpIKWQZyg5ygfazn6QPYsZ9zjj1T2fVaBUzW7kpdKxQ15vnUt7WX1TUQXKJnccgs9U9Q5OfG8B5KpIqTnbYZ8Z8JCGifwk/0vNh8njZtxG+MVG+Jxsb4CGhfXOnd/jG0XRnHbFGStSpDnGxku+baM5HFPOAq8LN+ZiuVCi1QpuQn2URSBDCMfxioUfDVpnJbfTaWdhitTPzudP9Xjn48tPgXhdb32A0+qiQAAAAASUVORK5CYII=" alt="address">
+        <p>Loading... Please wait</p>
+        <div class="progress"></div>
+    </div>
+
+    <section class="header">
+        <div class="header--container">
+            <h1 class="header--brand">
+                New York City
+                <span>
+                    <a href="#####" target="_blank">BY Himantha</a>
+                </span>
+            </h1>
+            <ul class="header--menu">
+                <li class="music--control">
+                    <svg class="music--control--svg" viewBox="0 0 24 24">
+                        <path d="M11 5L6 9H2V15H6L11 19V5Z" />
+                        <path class="sound-wave" d="M19.07 4.92999C20.9447 6.80527 21.9979 9.34835 21.9979 12C21.9979 14.6516 20.9447 17.1947 19.07 19.07M15.54 8.45999C16.4774 9.39763 17.004 10.6692 17.004 11.995C17.004 13.3208 16.4774 14.5924 15.54 15.53" />
+                    </svg>
+                </li>
+                <li class="night--mode">
+                    <svg class="night--mode--svg" viewBox="0 0 24 24">
+                        <path d="M20.9999 12.79C20.8426 14.4922 20.2038 16.1144 19.1581 17.4668C18.1125 18.8192 16.7034 19.8458 15.0956 20.4265C13.4878 21.0073 11.7479 21.1181 10.0794 20.7461C8.41092 20.3741 6.8829 19.5345 5.67413 18.3258C4.46536 17.117 3.62584 15.589 3.25381 13.9205C2.88178 12.252 2.99262 10.5121 3.57336 8.9043C4.15411 7.29651 5.18073 5.88737 6.53311 4.84175C7.8855 3.79614 9.5077 3.15731 11.2099 3C10.2133 4.34827 9.73375 6.00945 9.85843 7.68141C9.98312 9.35338 10.7038 10.9251 11.8893 12.1106C13.0748 13.2961 14.6465 14.0168 16.3185 14.1415C17.9905 14.2662 19.6516 13.7866 20.9999 12.79V12.79Z" />
+                    </svg>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <div class="hero-text">
+        <!-- <h1>New York City</h1>
+        <p> most populous city in the United States.</p> -->
+        <button class="explore-btn" id="ExploerButton">Explorar</button>
+    </div>
+
+    <audio id="Audio" src="/public/music_loop.mp3" loop></audio>
+
+
+<script>
+
+    const musicControl = document.querySelector('.music--control');
+    const musicControlSvg = document.querySelector('.music--control--svg');
+    const soundWave = document.querySelector('.sound-wave');
+    const audio = document.getElementById('Audio');
+    
+    const nightMode = document.querySelector('.night--mode');
+
+    const body = document.querySelector('body');
+    const herotext = document.querySelector('.hero-text');
+    
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const progressBar = document.querySelector('.loader .progress');
+
+    let progress = 0;
+    const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.transform = `scaleX(${progress / 100})`;
+            if (progress >= 100) {
+                clearInterval(interval);
+                document.body.classList.add('loaded');
+                audio.play();
+                // bodyLoaded();
+            }
+        }, 100); 
+    });	
+
+    // function bodyLoaded() {
+    //     body.style.backgroundImage = 'url(public/new-york-city-skyline-in-black-and-white.webp)';
+    //     body.style.backgroundSize = 'cover';
+    //     body.style.backgroundRepeat = 'no-repeat';
+    //     body.style.overflow = 'false';
+    // }
+
+    // audio.addEventListener("ended", function(){
+    // 	audio.currentTime = 0;
+    // 	console.log("ended");
+    // 	let TakeEnd = true;
+    // 		if (TakeEnd){
+    // 			audio.setAttribute('src', 'assets/sounds/Shapeshifter (Game Version) (Clean).mp3');
+    // 			audio.setAttribute('autoplay','');
+    // 			audio.setAttribute('loop','');
+    // 		}
+    // });
+    
+
+    let musicPlaying = true;
+
+    musicControl.addEventListener('click', () => {
+        if (musicPlaying) {
+            soundWave.remove();
+            audio.pause();
+            musicPlaying = false;
+        } else {
+            musicControlSvg.appendChild(soundWave);
+            audio.play();
+            musicPlaying = true;
+        }
+    });
+    
+
+
+    // let NIghtModeOff = false;
+    
+    // nightMode.addEventListener('click', () => {
+    //     if(!NIghtModeOff) {
+    //         body.style.background = 'radial-gradient(circle, #464646bd 20%, #464646bd 100%)';  // change the background color if ou want
+    //         NIghtModeOff = true;
+    //     } else {
+    //         body.style.background = '#E6BFBE';
+    //         NIghtModeOff = false;
+    //     }
+        
+    // });
+    
+
+</script>
+
+    <script src="main.js" type="module"></script>
+
+</body>
+</html>
