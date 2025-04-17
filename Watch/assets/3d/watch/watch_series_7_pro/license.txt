@@ -1,0 +1,11 @@
+Model Information:
+* title:	Watch Series 7 Pro
+* source:	https://sketchfab.com/3d-models/watch-series-7-pro-90fdd00f391240ecb328097971c196fe
+* author:	Rajarajan.Manoharan (https://sketchfab.com/Rajarajan.Manoharan)
+
+Model License:
+* license type:	CC-BY-ND-4.0 (http://creativecommons.org/licenses/by-nd/4.0/)
+* requirements:	Author must be credited. Modified versions can not be distributed. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Watch Series 7 Pro" (https://sketchfab.com/3d-models/watch-series-7-pro-90fdd00f391240ecb328097971c196fe) by Rajarajan.Manoharan (https://sketchfab.com/Rajarajan.Manoharan) licensed under CC-BY-ND-4.0 (http://creativecommons.org/licenses/by-nd/4.0/)

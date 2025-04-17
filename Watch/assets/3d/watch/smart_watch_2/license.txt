@@ -1,0 +1,11 @@
+Model Information:
+* title:	Smart Watch 2
+* source:	https://sketchfab.com/3d-models/smart-watch-2-ab2b3f68acf44953b9daba57a02af9bb
+* author:	3D_Modling_Master (https://sketchfab.com/3D_Modling_Master)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Smart Watch 2" (https://sketchfab.com/3d-models/smart-watch-2-ab2b3f68acf44953b9daba57a02af9bb) by 3D_Modling_Master (https://sketchfab.com/3D_Modling_Master) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
