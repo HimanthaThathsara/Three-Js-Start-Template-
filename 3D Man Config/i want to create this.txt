@@ -1,0 +1,21 @@
+i want to create this deadpool character likr it game.
+
+using finite state machines, third person camera.
+
+=====================================================================
+
+WASD Key / SHIFT Key to run / SPACE Key to Jump / C key to crouch or slide. (when user donot user any key for one minute deadpool will bleam to user animation) 
+
+========================================================================
+
+finite state machines
+   == [https://threejs.org/examples/#webgl_animation_skinning_blending]
+   == [https://threejs.org/examples/#webgl_animation_skinning_blending]
+
+third person camera
+   == [https://discourse.threejs.org/t/third-person-camera/55349]
+   
+finite state machines, third person camera
+   == [https://codepen.io/cdeep/full/QWMWyYW]
+   == [https://codepen.io/boytchev/pen/RwErNZM]
+
