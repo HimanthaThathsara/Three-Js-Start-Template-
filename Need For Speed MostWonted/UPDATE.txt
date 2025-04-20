@@ -1,0 +1,7 @@
+I want to Update this project by adding few more fuction.
+1.) Add the mostwonted Music tracks as a background music and a button to MUTE AND UNMUTE.
+2.) After click the model hide the all text and add few more view possition by clicking the button [ the button can get form the "3D man config" project  ] 
+3.) you can get the view possition idea from this site ( https://www.artstation.com/m3dov )
+4.) and finaly i want to add a boom effect on the front light and backside bracklight ( https://www.reddit.com/r/needforspeed/comments/wztclq/the_legendary_car_from_the_game_need_for_speed/ )
+
+https://carvisualizer.plus360degrees.com/threejs/
